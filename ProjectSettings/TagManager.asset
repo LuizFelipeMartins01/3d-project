@@ -8,6 +8,7 @@ TagManager:
   - Porta
   - Item\
   - Item
+  - Fatal
   layers:
   - Default
   - TransparentFX

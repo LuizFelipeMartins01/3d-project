@@ -258,7 +258,7 @@ AnimatorStateMachine:
     m_Position: {x: 1590, y: -240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7669857100446883182}
-    m_Position: {x: 400, y: 480, z: 0}
+    m_Position: {x: 380, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7854744152848611105}
     m_Position: {x: 1140, y: 210, z: 0}
@@ -302,7 +302,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -400, y: -280, z: 0}
-  m_EntryPosition: {x: 150, y: 20, z: 0}
+  m_EntryPosition: {x: 70, y: 110, z: 0}
   m_ExitPosition: {x: 420, y: -40, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -7669857100446883182}
@@ -481,10 +481,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Interagir
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8166949522565478691}
   m_Solo: 0
@@ -520,7 +517,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 3311174667178009610, guid: c39c0004edb0b7b44b73016d03630b8d, type: 3}
+  m_Motion: {fileID: -1764627894708832522, guid: c39c0004edb0b7b44b73016d03630b8d, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -805,7 +802,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 9100000}
   - m_Name: Estanochao
     m_Type: 4
