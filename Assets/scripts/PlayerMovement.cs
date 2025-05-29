@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private float inputV;
     private Animator animator;
     private bool estaNoChao = true;
-    private bool estaVivo = true;
+    private SistemaDeVida sVida;
     private float velocidadeAtual;
     private Vector3 anguloRotacao = new Vector3(0, 90, 0);
     [SerializeField] private float velocidadeCorrer;
@@ -20,12 +20,13 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         velocidadeAtual = velocidadeAndar;
+        sVida = GetComponent<SistemaDeVida>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (estaVivo)
+        if (sVida.EstaVivo())
         {
             Andar();
             Girar();
@@ -103,7 +104,6 @@ public class PlayerMovement : MonoBehaviour
     {
         animator.SetTrigger("Morrer");
         animator.SetBool("EstaVivo " ,  false);
-        estaVivo = false;
         rb.Sleep();
 
     }
@@ -133,6 +133,10 @@ public class PlayerMovement : MonoBehaviour
             animator.SetTrigger("Atacar");
         }
     }
+    public void Hit()
+    {
+        animator = null;
+    }
   
     private void OnCollisionStay(Collision collision)
     {
@@ -141,10 +145,7 @@ public class PlayerMovement : MonoBehaviour
             estaNoChao = true;
             animator.SetBool("EstaNoChao", true);
         }
-        if(collision.gameObject.CompareTag("Fatal") && estaVivo)
-        {
-            Morrer();
-        }
+       
     }
 
     private void OnCollisionExit(Collision collision)
