@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private SistemaDeVida sVida;
     private float velocidadeAtual;
     private Vector3 anguloRotacao = new Vector3(0, 90, 0);
+    private bool temChave = false;
+    private int numeroChave = 0;
     [SerializeField] private float velocidadeCorrer;
     [SerializeField] private float velocidadeAndar;
     [SerializeField] private float forcaPulo;
@@ -140,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
   
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Floor"))
+        if (collision.gameObject.CompareTag("floor"))
         {
             estaNoChao = true;
             animator.SetBool("EstaNoChao", true);
@@ -150,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Floor"))
+        if (collision.gameObject.CompareTag("floor"))
         {
             estaNoChao = false;
             animator.SetBool("EstaNoChao", false);
@@ -166,8 +168,23 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (other.CompareTag("Porta") && Input.GetKey(KeyCode.E))
         {
-            Interagir();
-            other.gameObject.GetComponent<Animator>().SetTrigger("Abrir");
+            if(!other.gameObject.GetComponent<Porta>().PortaTrancada())
+            {
+                Interagir();
+                other.gameObject.GetComponent<Porta>().AbrirPorta(numeroChave);
+            }
+            else if(other.gameObject.GetComponent<Porta>().PortaTrancada())
+            {
+                Interagir();
+                other.gameObject.GetComponent<Porta>().AbrirPorta();
+            }
+        }
+        else if(other.gameObject.CompareTag("Chave") && Input.GetKey(KeyCode.E))
+        {
+            Pegar();
+            temChave = true;
+            numeroChave = other.gameObject.GetComponent<Chave>().NumeroPorta();
+            other.gameObject.GetComponent<Chave>().PegarChave();
         }
     }
 }

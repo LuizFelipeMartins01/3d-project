@@ -9,6 +9,8 @@ TagManager:
   - Item\
   - Item
   - Fatal
+  - Interagir
+  - Chave
   layers:
   - Default
   - TransparentFX
