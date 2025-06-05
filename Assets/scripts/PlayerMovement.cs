@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,10 +12,13 @@ public class PlayerMovement : MonoBehaviour
     private float velocidadeAtual;
     private Vector3 anguloRotacao = new Vector3(0, 90, 0);
     private bool temChave = false;
-    private int numeroChave = 0;
+    private int numeroChave = 0; 
     [SerializeField] private float velocidadeCorrer;
     [SerializeField] private float velocidadeAndar;
     [SerializeField] private float forcaPulo;
+    [SerializeField] private GameObject machadoPreFab;
+    [SerializeField] private GameObject miraMachado;
+    [SerializeField] private int forcaArremeco;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -138,8 +142,24 @@ public class PlayerMovement : MonoBehaviour
     public void Hit()
     {
         animator = null;
+   }
+  public void Lancar()
+    {
+        if(Input.GetKey(KeyCode.Q))
+        {
+            StartCoroutine(LancarArma());
+            animator.SetTrigger("Lancar");
+        }
     }
-  
+    IEnumerator LancarArma()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GameObject machado = Instantiate(machadoPreFab , miraMachado.transform.position , miraMachado.transform.rotation);
+        Rigidbody rbMachado = machado.GetComponent<Rigidbody>();
+        machado.transform.rotation = Quaternion.Euler(0, -90, 0);
+        rbMachado.AddForce(miraMachado.transform.forward * forcaArremeco , ForceMode.Impulse);
+      
+    }
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("floor"))
