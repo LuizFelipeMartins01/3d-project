@@ -3,7 +3,7 @@ using UnityEngine;
 public class MachadoLancado : MonoBehaviour
 {
     [SerializeField] private int dano;
-    //[SerializeField] private GameObject destroyMachadoPreFab;
+    [SerializeField] private GameObject destroyMachadoPreFab;
 
     private void OnCollisionEnter(Collision collision)
     {
