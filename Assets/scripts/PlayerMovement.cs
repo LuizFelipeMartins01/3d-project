@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private bool estaNoChao = true;
     private SistemaDeVida sVida;
+    private bool morrer = true;
     private float velocidadeAtual;
     private Vector3 anguloRotacao = new Vector3(0, 90, 0);
     private bool temChave = false;
@@ -40,6 +41,10 @@ public class PlayerMovement : MonoBehaviour
             Correr();
             Atacar();
             AtacarDois();
+        }
+        else if (!sVida.EstaVivo() && morrer)
+        {
+            Morrer();
         }
      }
 
@@ -108,8 +113,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Morrer()
     {
+        morrer = false;
+        animator.SetBool("EstaVivo ", false);
         animator.SetTrigger("Morrer");
-        animator.SetBool("EstaVivo " ,  false);
         rb.Sleep();
 
     }
@@ -205,6 +211,10 @@ public class PlayerMovement : MonoBehaviour
             temChave = true;
             numeroChave = other.gameObject.GetComponent<Chave>().NumeroPorta();
             other.gameObject.GetComponent<Chave>().PegarChave();
+        }
+        else if(other.CompareTag("Mana") && Input.GetKey(KeyCode.E))
+        {
+
         }
     }
 }

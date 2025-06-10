@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Estanochao
+    m_ConditionEvent: EstaNoChao
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8829006727864385288}
@@ -386,7 +386,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: Estanochao
+    m_ConditionEvent: EstaNoChao
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3765136498920506260}
@@ -491,8 +491,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Morrer
+  - m_ConditionMode: 2
+    m_ConditionEvent: Estavivo
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8166949522565478691}
@@ -675,7 +675,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Estanochao
+    m_ConditionEvent: EstaNoChao
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: Correr
@@ -866,7 +866,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 1
     m_Controller: {fileID: 9100000}
-  - m_Name: Estanochao
+  - m_Name: EstaNoChao
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -1045,7 +1045,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: Estanochao
+    m_ConditionEvent: EstaNoChao
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3765136498920506260}
@@ -1385,7 +1385,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Pular
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: Estanochao
+    m_ConditionEvent: EstaNoChao
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -949939432168855691}
@@ -1438,7 +1438,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Estanochao
+    m_ConditionEvent: EstaNoChao
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: Andar
