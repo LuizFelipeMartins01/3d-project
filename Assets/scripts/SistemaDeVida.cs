@@ -86,21 +86,24 @@ public class SistemaDeVida : MonoBehaviour
         }
     }
 
-    public int GetMana()
+    public void CargaMana(int carga)
     {
-        return mana;
-    }
-
-    IEnumerable RecarregaMana()
-    {
-        podeRecarregarMana = false;
-        while (mana < 100)
+        mana+= carga;
+        manaIndicador.value = mana;
+            if(mana > 100)
         {
-            mana += 5;
-            manaIndicador.value = mana;
-            yield return new WaitForSeconds(0.1f);
+            mana = 100;
+            manaIndicador.value = vida;
         }
-        mana = 100;
-        podeRecarregarMana = true;
+    }
+    public void CargaVida(int carga)
+    {
+        mana += carga;
+        manaIndicador.value = vida;
+        if (vida > 100)
+        {
+            vida = 100;
+            manaIndicador.value = vida;
+        }
     }
 }

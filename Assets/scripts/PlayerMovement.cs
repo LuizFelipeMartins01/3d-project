@@ -13,7 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private float velocidadeAtual;
     private Vector3 anguloRotacao = new Vector3(0, 90, 0);
     private bool temChave = false;
-    private int numeroChave = 0; 
+    private int numeroChave = 0;
+    private SistemaInterativo sistemaInterativo;
     [SerializeField] private float velocidadeCorrer;
     [SerializeField] private float velocidadeAndar;
     [SerializeField] private float forcaPulo;
@@ -46,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Morrer();
         }
-     }
+    }
 
     private void Andar()
     {
@@ -138,9 +139,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-   private void AtacarDois()
+    private void AtacarDois()
     {
-        if(Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))
         {
             animator.SetTrigger("Atacar");
         }
@@ -148,10 +149,10 @@ public class PlayerMovement : MonoBehaviour
     public void Hit()
     {
         animator = null;
-   }
-  public void Lancar()
+    }
+    public void Lancar()
     {
-        if(Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q))
         {
             StartCoroutine(LancarArma());
             animator.SetTrigger("Lancar");
@@ -160,11 +161,11 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator LancarArma()
     {
         yield return new WaitForSeconds(0.5f);
-        GameObject machado = Instantiate(machadoPreFab , miraMachado.transform.position , miraMachado.transform.rotation);
+        GameObject machado = Instantiate(machadoPreFab, miraMachado.transform.position, miraMachado.transform.rotation);
         Rigidbody rbMachado = machado.GetComponent<Rigidbody>();
         machado.transform.rotation = Quaternion.Euler(0, -90, 0);
-        rbMachado.AddForce(miraMachado.transform.forward * forcaArremeco , ForceMode.Impulse);
-      
+        rbMachado.AddForce(miraMachado.transform.forward * forcaArremeco, ForceMode.Impulse);
+
     }
     private void OnCollisionStay(Collision collision)
     {
@@ -173,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
             estaNoChao = true;
             animator.SetBool("EstaNoChao", true);
         }
-       
+
     }
 
     private void OnCollisionExit(Collision collision)
@@ -194,27 +195,60 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (other.CompareTag("Porta") && Input.GetKey(KeyCode.E))
         {
-            if(!other.gameObject.GetComponent<Porta>().PortaTrancada())
+            if (!other.gameObject.GetComponent<Porta>().PortaTrancada())
             {
                 Interagir();
                 other.gameObject.GetComponent<Porta>().AbrirPorta(numeroChave);
             }
-            else if(other.gameObject.GetComponent<Porta>().PortaTrancada())
+            else if (other.gameObject.GetComponent<Porta>().PortaTrancada())
             {
                 Interagir();
                 other.gameObject.GetComponent<Porta>().AbrirPorta();
             }
         }
-        else if(other.gameObject.CompareTag("Chave") && Input.GetKey(KeyCode.E))
+        else if (other.gameObject.CompareTag("Chave") && Input.GetKey(KeyCode.E))
         {
             Pegar();
             temChave = true;
             numeroChave = other.gameObject.GetComponent<Chave>().NumeroPorta();
             other.gameObject.GetComponent<Chave>().PegarChave();
         }
-        else if(other.CompareTag("Mana") && Input.GetKey(KeyCode.E))
+        else if (other.CompareTag("Mana") && Input.GetKey(KeyCode.E))
         {
+            Pegar();
 
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("Vida") && Input.GetKey(KeyCode.E))
+        {
+            Pegar();
+            Destroy(other.gameObject);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Mana"))
+        {
+            sistemaInterativo.ExibirInteragir();
+        }
+        else if (other.CompareTag("Vida"))
+        {
+            sistemaInterativo.ExibirInteragir();
+        }
+        else if (other.CompareTag("Porta"))
+        {
+            if (other.gameObject.GetComponent<Porta>().PortaTrancada())
+            {
+                sistemaInterativo.ExibirTrancado();
+            }
+            else if (!other.gameObject.GetComponent<Porta>().PortaTrancada())
+            {
+                sistemaInterativo.ExibirDestrancado();
+            }
+            else if (other.CompareTag("Chave"))
+            {
+                sistemaInterativo.ExibirInteragir();
+            }
         }
     }
 }
