@@ -7,7 +7,9 @@ public class Avisos : MonoBehaviour
     [SerializeField] private string avisosTexto;
     [SerializeField] private Sprite spriteAvisos;
     [ColorUsage(true)]
-    [SerializeField] private Color corAviso;
+    [SerializeField] private Color corAviso = Color.white;
+    [Header("O aviso e temporario?")]
+    [SerializeField] private bool avisoTemporario = false;
    
     public string AvisosTexto()
     {
@@ -26,6 +28,10 @@ public class Avisos : MonoBehaviour
         spriteAvisos = s;
         avisosTexto = t;
         corAviso = c;
+    }
+    public bool AvisoTemporario()
+    {
+        return avisoTemporario;
     }
    
 }

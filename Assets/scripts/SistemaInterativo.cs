@@ -22,10 +22,18 @@ public class SistemaInterativo : MonoBehaviour
         if (other.gameObject.TryGetComponent<Avisos>(out Avisos a))
         {
             StartCoroutine(ExibirAvisos(a.SpriteAvisos(), a.AvisosTexto(), a.CorAviso()));
+            if(a.AvisoTemporario())
+            {
+                StartCoroutine(TimerAvisoTemporario(other.gameObject));
+            }
         }
     }
 
-
+    IEnumerator TimerAvisoTemporario(GameObject g)
+    {
+       yield return new WaitForSeconds(tempoExibir);
+        Destroy(g);
+    }
 
     IEnumerator ExibirAvisos(Sprite sprite,string texto,Color color)
     {
