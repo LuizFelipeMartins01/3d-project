@@ -1,60 +1,43 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SistemaInterativo : MonoBehaviour
 {
-    [SerializeField] private Sprite sTrancado;
-    [SerializeField] private Sprite sAberto;
-    [SerializeField] private Sprite sInteragir;
-    [SerializeField] private Sprite sDestrancado;
-    [SerializeField] private Sprite sPlay;
-    [SerializeField] private Sprite sLigar;
+    [Header("objeto do canvas Icone")]
     [SerializeField] private Image spriteInterface;
+    [Header("objeto do canvas Texto")]
+    [SerializeField] private TextMeshProUGUI avisoTexto;
     [SerializeField] private float tempoExibir;
 
     void Start()
     {
         spriteInterface.enabled = false;
+        avisoTexto.enabled = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(ExibirSprite(sLigar));
+        if (other.gameObject.TryGetComponent<Avisos>(out Avisos a))
+        {
+            StartCoroutine(ExibirAvisos(a.SpriteAvisos(), a.AvisosTexto(), a.CorAviso()));
+        }
     }
-    public void ExibirPlay()
-    {
-        StartCoroutine(ExibirSprite(sPlay));
-    }
-    public void ExibirLigar()
-    {
-        StartCoroutine(ExibirSprite(sLigar));
-    }
-    public void ExibirDestrancado()
-    {
-        StartCoroutine(ExibirSprite(sDestrancado));
-    }
-    public void ExibirInteragir()
-    {
-        StartCoroutine(ExibirSprite(sInteragir));
-    }
-    public void ExibirAberto()
-    {
-        StartCoroutine(ExibirSprite(sAberto));
-    }
-    public void ExibirTrancado()
-    {
-        StartCoroutine(ExibirSprite(sTrancado));
-    }
-    
 
-    IEnumerator ExibirSprite(Sprite sprite)
+
+
+    IEnumerator ExibirAvisos(Sprite sprite,string texto,Color color)
     {
         spriteInterface.enabled = true;
+        avisoTexto.enabled = true;
         spriteInterface.sprite = sprite;
+        spriteInterface.color = color;
+        avisoTexto.text = texto;
+        avisoTexto.color = color;
         yield return new WaitForSeconds(5f);
         spriteInterface.enabled = false;
+        avisoTexto.enabled = false;
     }
 
 }

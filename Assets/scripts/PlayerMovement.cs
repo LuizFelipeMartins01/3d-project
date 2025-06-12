@@ -225,30 +225,5 @@ public class PlayerMovement : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Mana"))
-        {
-            sistemaInterativo.ExibirInteragir();
-        }
-        else if (other.CompareTag("Vida"))
-        {
-            sistemaInterativo.ExibirInteragir();
-        }
-        else if (other.CompareTag("Porta"))
-        {
-            if (other.gameObject.GetComponent<Porta>().PortaTrancada())
-            {
-                sistemaInterativo.ExibirTrancado();
-            }
-            else if (!other.gameObject.GetComponent<Porta>().PortaTrancada())
-            {
-                sistemaInterativo.ExibirDestrancado();
-            }
-            else if (other.CompareTag("Chave"))
-            {
-                sistemaInterativo.ExibirInteragir();
-            }
-        }
-    }
+ 
 }
