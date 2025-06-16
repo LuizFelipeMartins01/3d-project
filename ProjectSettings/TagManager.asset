@@ -11,6 +11,7 @@ TagManager:
   - Fatal
   - Interagir
   - Chave
+  - quebrar
   layers:
   - Default
   - TransparentFX

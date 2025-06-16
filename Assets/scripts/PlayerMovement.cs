@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 anguloRotacao = new Vector3(0, 90, 0);
     private bool temChave = false;
     private int numeroChave = 0;
+    private bool contato = false;
     private SistemaInterativo sistemaInterativo;
     [SerializeField] private float velocidadeCorrer;
     [SerializeField] private float velocidadeAndar;
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject machadoPreFab;
     [SerializeField] private GameObject miraMachado;
     [SerializeField] private int forcaArremeco;
+    [SerializeField] private GameObject quebraPreFab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -46,6 +48,10 @@ public class PlayerMovement : MonoBehaviour
         else if (!sVida.EstaVivo() && morrer)
         {
             Morrer();
+        }
+        if(Input.GetMouseButtonDown(0))
+        {
+            contato = true;
         }
     }
 
@@ -131,12 +137,12 @@ public class PlayerMovement : MonoBehaviour
         animator.SetTrigger("Pegar");
     }
 
-    private void Atacar()
+    private int Atacar()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            animator.SetTrigger("Atacar");
-        }
+        animator.SetTrigger("Atacar");
+        Instantiate(quebraPreFab , miraMachado.transform.position , miraMachado.transform.rotation);
+        contato = false;
+        return 10;
     }
 
     private void AtacarDois()
@@ -224,6 +230,16 @@ public class PlayerMovement : MonoBehaviour
             Pegar();
             Destroy(other.gameObject);
         }
+
+        if(other.gameObject.CompareTag("quebrar"))
+        {
+            if(contato)
+            {
+                other.gameObject.GetComponent<objetoQuebra>().Quebrar(Atacar());
+            }
+        }
+
+
     }
  
 }
