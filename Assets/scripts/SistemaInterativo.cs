@@ -5,24 +5,23 @@ using UnityEngine.UI;
 
 public class SistemaInterativo : MonoBehaviour
 {
-    [Header("objeto do canvas Icone")]
+    [Header("Objeto do Canvas que o Icone")]
     [SerializeField] private Image spriteInterface;
-    [Header("objeto do canvas Texto")]
-    [SerializeField] private TextMeshProUGUI avisoTexto;
+    [Header("Objeto do Canvas que o Texto")]
+    [SerializeField] private TextMeshProUGUI textoAviso;
     [SerializeField] private float tempoExibir;
-
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         spriteInterface.enabled = false;
-        avisoTexto.enabled = false;
+        textoAviso.enabled = false;
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent<Avisos>(out Avisos a))
         {
             StartCoroutine(ExibirAvisos(a.SpriteAvisos(), a.AvisosTexto(), a.CorAviso()));
-            if(a.AvisoTemporario())
+            if (a.AvisoTemporario())
             {
                 StartCoroutine(TimerAvisoTemporario(other.gameObject));
             }
@@ -31,21 +30,29 @@ public class SistemaInterativo : MonoBehaviour
 
     IEnumerator TimerAvisoTemporario(GameObject g)
     {
-       yield return new WaitForSeconds(tempoExibir);
+        yield return new WaitForSeconds(tempoExibir);
         Destroy(g);
     }
 
-    IEnumerator ExibirAvisos(Sprite sprite,string texto,Color color)
+
+    IEnumerator ExibirAvisos(Sprite s, string t, Color c)
     {
+        //Ativando os objetos
         spriteInterface.enabled = true;
-        avisoTexto.enabled = true;
-        spriteInterface.sprite = sprite;
-        spriteInterface.color = color;
-        avisoTexto.text = texto;
-        avisoTexto.color = color;
-        yield return new WaitForSeconds(5f);
+        textoAviso.enabled = true;
+
+        //Passando a sprite e definindo a cor do icone
+        spriteInterface.sprite = s;
+        spriteInterface.color = c;
+
+        //Passando a sprite e definindo a cor 
+        textoAviso.text = t;
+        textoAviso.color = c;
+
+        //Esperando um tempo para desativar os objetos 
+        yield return new WaitForSeconds(tempoExibir);
         spriteInterface.enabled = false;
-        avisoTexto.enabled = false;
+        textoAviso.enabled = false;
     }
 
 }
