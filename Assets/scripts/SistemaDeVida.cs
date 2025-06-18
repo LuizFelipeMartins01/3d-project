@@ -16,10 +16,14 @@ public class SistemaDeVida : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        ProcuraReferencias(); 
+    }
+    private void ProcuraReferencias()
+    {
         if (manaIndicador == null)
         {
             manaIndicador = GameObject.Find("manaIndicador").GetComponent<Slider>();
-            manaIndicador.maxValue = mana;
+            manaIndicador.maxValue = 100;
             manaIndicador.value = mana;
         }
 
@@ -29,14 +33,15 @@ public class SistemaDeVida : MonoBehaviour
             vidaIndicador.maxValue = vida;
             vidaIndicador.value = vida;
         }
-
-        pMove = GetComponent<PlayerMovement>();
+        if(pMove == null)
+        {
+            pMove = GetComponent<PlayerMovement>();
+        }
     }
-
     // Update is called once per frame
     void Update()
     {
-
+        ProcuraReferencias();
     }
 
     public bool EstaVivo()

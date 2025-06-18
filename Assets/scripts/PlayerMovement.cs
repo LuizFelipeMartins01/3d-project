@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -23,11 +24,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject miraMachado;
     [SerializeField] private int forcaArremeco;
     [SerializeField] private GameObject quebraPreFab;
+    [SerializeField] private CinemachineCamera cinecamera;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        ProcuraReferencias();
         animator = GetComponent<Animator>();
         velocidadeAtual = velocidadeAndar;
         sVida = GetComponent<SistemaDeVida>();
@@ -36,11 +39,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ProcuraReferencias();
+
         if (sVida.EstaVivo())
         {
-            Andar();
-            Girar();
-            Pular();
+           
             Correr();
             Atacar();
             AtacarDois();
@@ -54,7 +57,22 @@ public class PlayerMovement : MonoBehaviour
             contato = true;
         }
     }
-
+    
+    private void FixedUpdate()
+    {
+        if(sVida.EstaVivo())
+        {
+            Andar();
+            Girar();
+            Pular();
+        }
+    }
+    private void ProcuraReferencias()
+    {
+        transform.position = GameObject.Find("StartPoint").transform.position;
+        cinecamera = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
+        cinecamera.Follow = this.gameObject.transform;
+    }
     private void Andar()
     {
         inputV = Input.GetAxis("Vertical");
