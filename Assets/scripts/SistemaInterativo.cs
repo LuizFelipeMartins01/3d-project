@@ -38,7 +38,7 @@ public class SistemaInterativo : MonoBehaviour
     IEnumerator TimerAvisoTemporario(GameObject g)
     {
         yield return new WaitForSeconds(tempoExibir);
-        Destroy(g);
+        //Destroy(g);
     }
 
 

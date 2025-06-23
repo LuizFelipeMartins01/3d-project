@@ -43,10 +43,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (sVida.EstaVivo())
         {
-           
+          
             Correr();
             Atacar();
             AtacarDois();
+            Andar();
+            Girar();
+            Pular();
+
         }
         else if (!sVida.EstaVivo() && morrer)
         {
@@ -58,20 +62,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     
-    private void FixedUpdate()
-    {
-        if(sVida.EstaVivo())
-        {
-            Andar();
-            Girar();
-            Pular();
-        }
-    }
+   
     private void ProcuraReferencias()
     {
-        transform.position = GameObject.Find("StartPoint").transform.position;
-        cinecamera = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
-        cinecamera.Follow = this.gameObject.transform;
+        //transform.position = GameObject.Find("StartPoint").transform.position;
+        //cinecamera = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
+        //cinecamera.Follow = this.gameObject.transform;
     }
     private void Andar()
     {
@@ -90,11 +86,11 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("AndarParaTras", true);
             animator.SetBool("Andar", false);
         }
-        //else
-        //{
-        //    animator.SetBool("AndarParaTras", false);
-        //    animator.SetBool("Andar", false);
-        //}
+        else
+        {
+            animator.SetBool("AndarParaTras", false);
+            animator.SetBool("Andar", false);
+        }
     }
 
     private void Girar()
