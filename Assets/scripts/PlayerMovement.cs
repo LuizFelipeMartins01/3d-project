@@ -29,11 +29,13 @@ public class PlayerMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        DontDestroyOnLoad(this);
         rb = GetComponent<Rigidbody>();
         ProcuraReferencias();
         animator = GetComponent<Animator>();
         velocidadeAtual = velocidadeAndar;
         sVida = GetComponent<SistemaDeVida>();
+       
     }
 
     // Update is called once per frame
@@ -168,7 +170,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Hit()
     {
-        animator = null;
+        animator.SetTrigger("Hit");
     }
     public void Lancar()
     {

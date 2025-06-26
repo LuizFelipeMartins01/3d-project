@@ -6,9 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/cenario 01.unity
+    path: Assets/Scenes/Menu.unity
+    guid: a0ab2b9762961cc4d98c997e244f27a7
+  - enabled: 1
+    path: Assets/Scenes/Historia.unity
+    guid: b8eebcd8b053132439ce31c3de5a2fe5
+  - enabled: 1
+    path: Assets/Scenes/CenarioPrincipal.unity
     guid: 5bcba371234a8db45939551211f66f2a
   - enabled: 1
+    path: Assets/Scenes/CenarioSecundario.unity
+    guid: 76ac82f95900b33478fbd797c916b98f
+  - enabled: 1
+    path: Assets/Scenes/Creditos.unity
+    guid: 1a600a7b6283c2d43bca21ed6bf4c9e1
+  - enabled: 0
     path: Assets/Scenes/cenario 02.unity
     guid: c6f62c8015a9bb347a4ae88191344fe0
   m_configObjects:
