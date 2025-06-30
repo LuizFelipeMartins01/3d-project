@@ -8,7 +8,7 @@ public class SistemaDeVida : MonoBehaviour
     [SerializeField] private int mana = 100;
     [SerializeField] private Slider manaIndicador;
     [SerializeField] private Slider vidaIndicador;
-    private bool estaVivo = true;
+    [SerializeField] private bool estaVivo = true;
     private bool levarDano = true;
     private PlayerMovement pMove;
     private bool podeRecarregarMana = true;

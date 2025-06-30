@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject miraMachado;
     [SerializeField] private int forcaArremeco;
     [SerializeField] private GameObject quebraPreFab;
-    [SerializeField] private CinemachineCamera cinecamera;
+    [SerializeField] private CinemachineCamera cineCamera;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,12 +45,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (sVida.EstaVivo())
         {
-          
-            Correr();
-            Atacar();
+            //Atacar();
             AtacarDois();
-            Andar();
-            Girar();
             Pular();
 
         }
@@ -63,13 +59,24 @@ public class PlayerMovement : MonoBehaviour
             contato = true;
         }
     }
-    
-   
+    private void FixedUpdate()
+    {
+        if (sVida.EstaVivo())
+        {
+            Correr();
+            Andar();
+            Girar();
+        }
+    }
+
     private void ProcuraReferencias()
     {
-        //transform.position = GameObject.Find("StartPoint").transform.position;
-        //cinecamera = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
-        //cinecamera.Follow = this.gameObject.transform;
+        if (cineCamera == null)
+        {
+            transform.position = GameObject.Find("StartPoint").transform.position;
+            cineCamera = GameObject.Find("CinemachineCamera").GetComponent<CinemachineCamera>();
+            cineCamera.Follow = this.gameObject.transform;
+        }
     }
     private void Andar()
     {

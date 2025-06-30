@@ -29,7 +29,10 @@ public class MudarDeCena : MonoBehaviour
     {
         SceneManager.LoadScene("CenarioPrincipal");
     }
-
+    public void Menu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 
 
 
